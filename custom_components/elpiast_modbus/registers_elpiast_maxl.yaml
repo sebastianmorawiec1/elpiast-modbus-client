@@ -1,0 +1,1673 @@
+# Mapa rejestrow Modbus dla sterownika EL-PIAST ELP11R32L (MAX L+ v6.4)
+# Zrodlo: DTR 183-03-2021 (rozdz. 8 'Zmienne Modbus RTU').
+# Zmienne 32-bit; uzyto 16-bitowych przestrzeni adresowych sterownika:
+#  - Fixed  -> adres 0x7000 + (adr_tabeli/2), wartosc x100 -> scale 0.01
+#  - MSV    -> adres 0x4000 + (adr_tabeli/2), scale 1
+# Modbus TCP wymaga modulu ELP11R32L-MOD-IP+ (karta Ethernet).
+
+UnitState:
+  address: 16384
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan układu (aktualny) [0 - stop, 1 - praca 1 bieg, 2 praca 2 bieg, 4 - praca 3 bieg,]"
+
+SeasonAct:
+  address: 16385
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Aktualna pora roku [0 - okres przejściowy, 1 zima, 2 - lato]"
+
+WorkMode:
+  address: 16386
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read_write
+  description: "Ustaw tryb pracy [0 - stop, 1 - praca I bieg, 2 praca II bieg, 4 - 3 bieg, 8 czuwanie, 16 - Kalendarz]"
+  min: 0
+  max: 255
+  step: 1
+
+Tset:
+  address: 28675
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Nastawa temperatury"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+TsetActual:
+  address: 28676
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Zadana temperatura (uwzględnia kalendarz i rampę startu)"
+  device_class: temperature
+
+Tmain:
+  address: 28677
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Temperatura czujnika wiodącego regulacji temperatury"
+  device_class: temperature
+
+B1:
+  address: 28678
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Temperatura nawiewu"
+  device_class: temperature
+
+B2:
+  address: 28679
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Temperatura wywiewu"
+  device_class: temperature
+
+B3:
+  address: 28680
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Temperatura zewnętrzna"
+  device_class: temperature
+
+B4:
+  address: 28681
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Temperatura wywiewu za odzyskiem (opcja)"
+  device_class: temperature
+
+B8:
+  address: 28682
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Temperatury wody powrotnej z nagrzewnicy wodnej"
+  device_class: temperature
+
+CO2exh:
+  address: 28683
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "ppm"
+  access: read
+  description: "Pomiar CO2 powietrza wywiewanego"
+
+Hset:
+  address: 28684
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Nastawa wilgotności zadaniej"
+  min: 0
+  max: 100
+  step: 1
+
+Hmain:
+  address: 28685
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wilgotnosć wiodąca"
+
+Hsup:
+  address: 28686
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wilgotność nawiewu"
+
+Hreg:
+  address: 28687
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wilgotność regulacyjny"
+
+E6:
+  address: 16400
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Sygnał start/stop do nawilżacza [0 - stop, 1 - start]"
+
+Y11:
+  address: 28689
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Sygnał 0-100% do nawilżacza"
+
+Dehum:
+  address: 28690
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Sygnał 0-100% osuszania"
+
+Vent:
+  address: 16403
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Sygnał start/stop wentylatorów centrali [0 - stop, 1 - start]"
+
+PwrSup:
+  address: 28692
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie falownika nawiewu"
+
+PaSup:
+  address: 28693
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read
+  description: "Pomiar ciśnienia wentylatora nawiewu"
+
+FlowSup:
+  address: 28694
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: ""
+  access: read
+  description: "Pomiar wydatku powietrza wentylatora nawiewu (m3/h)"
+
+PwrExh:
+  address: 28695
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie falownika wywiewu"
+
+PaExh:
+  address: 28696
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read
+  description: "Pomiar ciśnienia wentylatora wywiewu"
+
+FlowExh:
+  address: 28697
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: ""
+  access: read
+  description: "Pomiar wydatku powietrza wentylatora wywiewu (m3/h)"
+
+Isup:
+  address: 28698
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "A"
+  access: read
+  description: "Prąd silnika wentylatora nawiewu"
+
+Fsup:
+  address: 28699
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read
+  description: "RS485: Częstotliwość falownika wentylatora nawiewu"
+
+RPMsup:
+  address: 28700
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "rpm"
+  access: read
+  description: "RS485: Obroty silnika EC wentylatora nawiewu"
+
+Usup:
+  address: 28701
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "RS485: Napięcie wyjścia falownika went. nawiewu"
+
+FaultSup:
+  address: 28702
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: ""
+  access: read
+  description: "RS485: Kod alarmu falownika went. nawiewu"
+
+ComSup:
+  address: 28703
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "RS485: Poprawność komunikacji z falownikiem nawiewu"
+
+Isup2:
+  address: 28704
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "A"
+  access: read
+  description: "RS485: Prąd silnika wentylatora nawiewu 2"
+
+Fsup2:
+  address: 28705
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read
+  description: "RS485: Częstotliwość falownika went. nawiewu 2"
+
+RPMsup2:
+  address: 28706
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "rpm"
+  access: read
+  description: "RS485: Obroty silnika EC went. nawiewu 2"
+
+Usup2:
+  address: 28707
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "RS485: Napięcie wyjścia falownika went. nawiewu 2"
+
+FaultSup2:
+  address: 28708
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: ""
+  access: read
+  description: "RS485: Kod alarmu falownika went. nawiewu 2"
+
+ComSup2:
+  address: 28709
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "RS485: Poprawność komunikacji z falownikiem nawiewu 2"
+
+Iexh:
+  address: 28710
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "A"
+  access: read
+  description: "RS485: Prąd silnika wentylatora wywiewu"
+
+Fexh:
+  address: 28711
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read
+  description: "RS485: Częstotliwość falownika went. wywiewu"
+
+RPMexh:
+  address: 28712
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "rpm"
+  access: read
+  description: "RS485: Obroty silnika EC went. wywiewu"
+
+Uexh:
+  address: 28713
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "RS485: Napięcie wyjścia falownika went. wywiewu"
+
+FaultExh:
+  address: 28714
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: ""
+  access: read
+  description: "RS485: Kod alarmu falownika went. wywiewu"
+
+ComExh:
+  address: 28715
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "RS485: Poprawność komunikacji z falownikiem wywiewu"
+
+Iexh2:
+  address: 28716
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "A"
+  access: read
+  description: "RS485: Prąd silnika went. wywiewu 2"
+
+Fexh2:
+  address: 28717
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read
+  description: "RS485: Częstotliwość falownika went. wywiewu 2"
+
+RPMexh2:
+  address: 28718
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "rpm"
+  access: read
+  description: "RS485: Obroty silnika EC went. wywiewu 2"
+
+Uexh2:
+  address: 28719
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "RS485: Napięcie wyjścia falownika went. wywiewu 2"
+
+FaultExh2:
+  address: 28720
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: ""
+  access: read
+  description: "RS485: Kod alarmu falownika went. wywiewu 2"
+
+ComExh2:
+  address: 28721
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "RS485: Poprawność komunikacji z falownikiem wywiewu 2"
+
+Y1:
+  address: 28722
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie nagrzewnicy wodnej"
+
+M1:
+  address: 16435
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Pompa obiegowa nagrzewnicy wodnej [0 - stop, 1 - start]"
+
+Y8:
+  address: 28724
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie nagrzewnicy wodnej wtórnej"
+
+M8:
+  address: 16437
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Pompa obiegowa nagrzewnicy wodnej wtórnej [0 - stop, 1 - start]"
+
+HePwr:
+  address: 28726
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie nagrzewnicy elektrycznej"
+
+HeSecPwr:
+  address: 28727
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie nagrzewnicy elektrycznej wtórnej"
+
+GasPwr:
+  address: 28728
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie nagrzewnicy gazowej"
+
+Y2:
+  address: 28729
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie chłodnicy wodnej"
+
+E1:
+  address: 16442
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Zapotrzebowanie na chłodzenie [0 - stop, 1 - start]"
+
+Y9:
+  address: 28731
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie chłodnicy freonowej"
+
+DXstate:
+  address: 16444
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan chłodnicy freonowej [0 - stop, 1 - I stopień, 2 - II]"
+
+YFX:
+  address: 28733
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie agregatu freonowego rewersyjnego"
+
+H_C:
+  address: 16446
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Tryb agregatu rewersyjnego [0 - grzanie, 1 - chłodzenie]"
+
+DEF:
+  address: 16447
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Odszranianie agregatu rewersyjnego [0 - stop, 1 - start]"
+
+YRec:
+  address: 28736
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie odzysku"
+
+M7:
+  address: 16449
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Pompa obiegowa odzysku glikolowego [0 - stop, 1 - start]"
+
+RecState:
+  address: 16450
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan odzysku [0 - stop, 1 - start, 2, 3 odszranianie]"
+
+SetMix:
+  address: 28739
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Nastawa komory mieszania w trybie ręcznym"
+  min: 0
+  max: 100
+  step: 1
+
+ThrMCh:
+  address: 28740
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie komory mieszania"
+
+ThrSuEx:
+  address: 28741
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read
+  description: "Wysterowanie przepustnicy nawiewnej i wywiewnej (z komorą mieszania)"
+
+Throt:
+  address: 16454
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Wysterowanie przepustnic (bez komory mieszania) [0 - stop, 1 - start]"
+
+OfsPT1:
+  address: 28747
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Korekta czujnika PT1"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+OfsPT2:
+  address: 28748
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Korekta czujnika PT2"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+OfsPT3:
+  address: 28749
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Korekta czujnika PT3"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+OfsPT4:
+  address: 28750
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Korekta czujnika PT4"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+OfsPT5:
+  address: 28751
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Korekta czujnika PT5"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+SeasonMode:
+  address: 16467
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read_write
+  description: "Tryb przełączania pory roku [0 - Tout, 1 - Tset]"
+  min: 0
+  max: 255
+  step: 1
+
+Tsummer:
+  address: 28756
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Temp. zewnętrzna przejścia w tryb Lato"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+HistSum:
+  address: 28757
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Histereza progu lato/zima"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+Hsmax:
+  address: 28762
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Maksymalna wilgotność nawiewu"
+  min: 0
+  max: 100
+  step: 1
+
+LimHum:
+  address: 28766
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Limit nawilżania"
+  min: 0
+  max: 100
+  step: 1
+
+LimOsusz:
+  address: 28767
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Limit osuszania"
+  min: 0
+  max: 100
+  step: 1
+
+TsetStd:
+  address: 28782
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Nastawa temperatury trybu czuwania"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+TstdbyAct:
+  address: 28784
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Aktualna temp. czujnika trybu czuwania"
+  device_class: temperature
+
+StdHis:
+  address: 28786
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Histereza trybu czuwania"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+PaSZ1:
+  address: 28795
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read_write
+  description: "Ciśnienie zadane 1 biegu nawiew"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+PaSZ2:
+  address: 28796
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read_write
+  description: "Ciśnienie zadane 2 biegu nawiew"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+PaSZ3:
+  address: 28797
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read_write
+  description: "Ciśnienie zadane 3 biegu nawiew"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+PaEZ1:
+  address: 28804
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read_write
+  description: "Ciśnienie zadane 1 biegu wywiew"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+PaEZ2:
+  address: 28805
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read_write
+  description: "Ciśnienie zadane 2 biegu wywiew"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+PaEZ3:
+  address: 28806
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Pa"
+  access: read_write
+  description: "Ciśnienie zadane 3 biegu wywiew"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+Sup1:
+  address: 28813
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Minimalna wydajność nawiewu"
+  min: 0
+  max: 100
+  step: 1
+
+Sup2:
+  address: 28814
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Średnia wydajność nawiewu"
+  min: 0
+  max: 100
+  step: 1
+
+Sup3:
+  address: 28815
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Maksymalna wydajność nawiewu"
+  min: 0
+  max: 100
+  step: 1
+
+Exh1:
+  address: 28816
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Minimalna wydajność wywiewu"
+  min: 0
+  max: 100
+  step: 1
+
+Exh2:
+  address: 28817
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Średnia wydajność wywiewu"
+  min: 0
+  max: 100
+  step: 1
+
+Exh3:
+  address: 28818
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Maksymalna wydajność wywiewu"
+  min: 0
+  max: 100
+  step: 1
+
+FminS:
+  address: 28823
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read_write
+  description: "Częstotliwość min. falownika nawiewu"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+FmaxS:
+  address: 28824
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read_write
+  description: "Częstotliwość maks. falownika nawiewu"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+FminE:
+  address: 28825
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read_write
+  description: "Częstotliwość min. falownika wywiewu"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+FmaxE:
+  address: 28826
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "Hz"
+  access: read_write
+  description: "Częstotliwość maks. falownika wywiewu"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+RECproc:
+  address: 28833
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Udział odzysku w regulacji temperatury"
+  min: 0
+  max: 100
+  step: 1
+
+MIXproc:
+  address: 28835
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Udział komory mieszania w regulacji temperatury"
+  min: 0
+  max: 100
+  step: 1
+
+TminBlow:
+  address: 28845
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Minimalna temperatura nawiewu"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+TmaxBlow:
+  address: 28846
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Maksymalna temperatura nawiewu"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+TsetBlowAct:
+  address: 28847
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Aktualna temp. zadana nawiewu (regulator typ 2)"
+  device_class: temperature
+
+RecMode:
+  address: 16560
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read_write
+  description: "Tryb pracy odzysku [0 - nieaktywny, 1 - odzysk]"
+  min: 0
+  max: 255
+  step: 1
+
+RecHist:
+  address: 28849
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Histereza pozwolenia odzysku"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+TlimRec:
+  address: 28851
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Min. temp. wywiewu za odzyskiem (szronienie)"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+MinRot:
+  address: 28852
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Minimalna wydajność odzysku obrotowego"
+  min: 0
+  max: 100
+  step: 1
+
+Tlim1:
+  address: 28867
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Temperatura załączenia pompy"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+MinValve:
+  address: 28869
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Minimalne otwarcie zaworu nagrzewnicy"
+  min: 0
+  max: 100
+  step: 1
+
+TbStopReg:
+  address: 28874
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read_write
+  description: "Nastawa temp. wody powrotnej nagrzewnicy (postój)"
+  device_class: temperature
+  min: 0
+  max: 50
+  step: 0.5
+
+MinFresh:
+  address: 28898
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Minimalne świeże powietrze"
+  min: 0
+  max: 100
+  step: 1
+
+MaxFresh:
+  address: 28899
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "%"
+  access: read_write
+  description: "Maksymalne świeże powietrze"
+  min: 0
+  max: 100
+  step: 1
+
+SetCO2:
+  address: 28903
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "ppm"
+  access: read_write
+  description: "Nastawa zadanego progu CO2"
+  min: -1000
+  max: 1000
+  step: 0.1
+
+PT_1:
+  address: 28995
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika PT1000 1"
+  device_class: temperature
+
+PT_2:
+  address: 28996
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika PT1000 2"
+  device_class: temperature
+
+PT_3:
+  address: 28997
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika PT1000 3"
+  device_class: temperature
+
+PT_4:
+  address: 28998
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika PT1000 4"
+  device_class: temperature
+
+PT_5:
+  address: 28999
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika PT1000 5"
+  device_class: temperature
+
+HMI_Con:
+  address: 29000
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika w zadajniku HMI CON"
+  device_class: temperature
+
+HMI_RS:
+  address: 29001
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "°C"
+  access: read
+  description: "Odczyt czujnika w zadajniku HMI RS485"
+  device_class: temperature
+
+Re1:
+  address: 16714
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 1 [0 - Wył., 1 - Zał.]"
+
+Re2:
+  address: 16715
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 2 [0 - Wył., 1 - Zał.]"
+
+Re3:
+  address: 16716
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 3 [0 - Wył., 1 - Zał.]"
+
+Re4:
+  address: 16717
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 4 [0 - Wył., 1 - Zał.]"
+
+Re5:
+  address: 16718
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 5 [0 - Wył., 1 - Zał.]"
+
+Re6:
+  address: 16719
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 6 [0 - Wył., 1 - Zał.]"
+
+Re7:
+  address: 16720
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 7 [0 - Wył., 1 - Zał.]"
+
+Re8:
+  address: 16721
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Stan wyjścia cyfrowego 8 [0 - Wył., 1 - Zał.]"
+
+AO1:
+  address: 29010
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "Stan wyjścia analogowego 1"
+
+AO2:
+  address: 29011
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "Stan wyjścia analogowego 2"
+
+AO3:
+  address: 29012
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "Stan wyjścia analogowego 3"
+
+AO4:
+  address: 29013
+  table: holding
+  data_type: int16
+  scale: 0.01
+  unit: "V"
+  access: read
+  description: "Stan wyjścia analogowego 4"
+
+A_ThHWair:
+  address: 16778
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm termostatu przeciwzamrożeniowego [0 - brak alarmu, 1 - występuje]"
+
+A_3xThHWair:
+  address: 16779
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm termostatu przeciwzamr. (3x w ciągu godziny) [0 - brak alarmu, 1 - występuje]"
+
+A_ThHWwater:
+  address: 16780
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm niskiej temp. wody powrotnej nagrzewnicy [0 - brak alarmu, 1 - występuje]"
+
+A_3xThHWwater:
+  address: 16781
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm niskiej temp. wody powrotnej (3x) [0 - brak alarmu, 1 - występuje]"
+
+A_ThHE:
+  address: 16782
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm termostatu nagrzewnicy elektrycznej [0 - brak alarmu, 1 - występuje]"
+
+A_3xThHE:
+  address: 16783
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm termostatu nagrz. elektr. (3x) [0 - brak alarmu, 1 - występuje]"
+
+A_ThHEsec:
+  address: 16784
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm termostatu nagrz. elektr. wtórnej [0 - brak alarmu, 1 - występuje]"
+
+A_ThGAS:
+  address: 16786
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm nagrzewnicy gazowej [0 - brak alarmu, 1 - występuje]"
+
+A_DX:
+  address: 16788
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm chłodnicy freonowej [0 - brak alarmu, 1 - występuje]"
+
+A_FX:
+  address: 16789
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm agregatu rewersyjnego [0 - brak alarmu, 1 - występuje]"
+
+A_Hum:
+  address: 16790
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm nawilżacza [0 - brak alarmu, 1 - występuje]"
+
+A_RecFC:
+  address: 16791
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm falownika odzysku obrotowego [0 - brak alarmu, 1 - występuje]"
+
+A_ColdRec:
+  address: 16792
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm oszronienia odzysku [0 - brak alarmu, 1 - występuje]"
+
+A_SupFilter:
+  address: 16793
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm brudnego filtra nawiewu [0 - brak alarmu, 1 - występuje]"
+
+A_SupFilter2:
+  address: 16794
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm brudnego filtra wtórnego nawiewu [0 - brak alarmu, 1 - występuje]"
+
+A_ExhFilter:
+  address: 16795
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm brudnego filtra wywiewu [0 - brak alarmu, 1 - występuje]"
+
+A_SupFC:
+  address: 16796
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm falownika wentylatora nawiewu [0 - brak alarmu, 1 - występuje]"
+
+A_ExhFC:
+  address: 16797
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm falownika wentylatora wywiewu [0 - brak alarmu, 1 - występuje]"
+
+A_ComSupFC:
+  address: 16798
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm braku komunikacji z falownikiem nawiewu [0 - brak alarmu, 1 - występuje]"
+
+A_ComExhFC:
+  address: 16800
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm braku komunikacji z falownikiem wywiewu [0 - brak alarmu, 1 - występuje]"
+
+A_SupPres:
+  address: 16802
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm wentylatora nawiewu (presostat) [0 - brak alarmu, 1 - występuje]"
+
+A_ExhPres:
+  address: 16803
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm wentylatora wywiewu (presostat) [0 - brak alarmu, 1 - występuje]"
+
+A_HighCO:
+  address: 16804
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm przekroczenia stężenia CO [0 - brak alarmu, 1 - występuje]"
+
+A_Tsup:
+  address: 16805
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm czujnika temp. nawiewu [0 - brak alarmu, 1 - występuje]"
+
+A_Texh:
+  address: 16806
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm czujnika temp. wywiewu [0 - brak alarmu, 1 - występuje]"
+
+A_Tout:
+  address: 16807
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm czujnika temp. zewnętrznej [0 - brak alarmu, 1 - występuje]"
+
+A_Trec:
+  address: 16808
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm czujnika temp. za odzyskiem [0 - brak alarmu, 1 - występuje]"
+
+A_TbackWater:
+  address: 16809
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm czujnika temp. wody powrotnej [0 - brak alarmu, 1 - występuje]"
+
+A_Tmain:
+  address: 16810
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm czujnika temperatury wiodącej [0 - brak alarmu, 1 - występuje]"
+
+A_ComN1_2:
+  address: 16815
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm braku komunikacji ze sterownikiem N1.2 [0 - brak alarmu, 1 - występuje]"
+
+Alarm:
+  address: 16816
+  table: holding
+  data_type: int16
+  scale: 1.0
+  unit: ""
+  access: read
+  description: "Alarm zbiorczy [0 - brak alarmu, 1 - występuje]"
