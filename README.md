@@ -3,10 +3,12 @@
 Integracja **Home Assistant** dla sterowników automatyki **EL-PIAST ELP11R32L (MAX L+)**
 central wentylacyjnych, po protokole **Modbus TCP/IP** (moduł ELP11R32L-MOD-IP+ z kartą Ethernet).
 
-Mapa **403 zmiennych** opracowana na podstawie oficjalnej DTR 183-03-2021 MAX L+ v6.4
-(rozdz. 8 „Zmienne Modbus RTU"): temperatury (B1–B8), tryb pracy (WorkMode), nastawa
-temperatury (Tset), wilgotność, CO2, falowniki nawiew/wywiew (prąd, Hz, RPM), pompy,
-nagrzewnice, odzysk, alarmy.
+Mapa **ponad 160 kluczowych zmiennych** opracowana na podstawie oficjalnej DTR 183-03-2021
+MAX L+ v6.4 (rozdz. 8 „Zmienne Modbus RTU"): temperatury (B1–B8, PT1–5), tryb pracy (WorkMode),
+nastawa temperatury (Tset), wilgotność, CO2, falowniki nawiew/wywiew (prąd, Hz, RPM), pompy,
+nagrzewnice (wodna/elektryczna/gazowa), chłodnice, odzysk, komora mieszania oraz ~35 alarmów.
+Pełna lista zmiennych DTR obejmuje 403 pozycje — pozostałe (serwisowe, emulacje we/wy) można
+dodać własnym plikiem `registers.yaml` w tym samym formacie.
 
 ## Adresowanie (ważne!)
 
