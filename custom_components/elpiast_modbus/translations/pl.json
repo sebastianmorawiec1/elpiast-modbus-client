@@ -1,0 +1,24 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Połączenie ze sterownikiem EL-Piast (Modbus TCP/IP)",
+        "data": {
+          "host": "Adres IP / host",
+          "port": "Port",
+          "unit_id": "Unit ID (adres slave)",
+          "scan_interval": "Interwał odpytywania (s)",
+          "registers_file": "Ścieżka do własnego pliku registers.yaml (opcjonalnie)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie udało się połączyć z urządzeniem.",
+      "invalid_registers_file": "Błędny plik mapy rejestrów.",
+      "unknown": "Nieoczekiwany błąd."
+    },
+    "abort": {
+      "already_configured": "To urządzenie jest już skonfigurowane."
+    }
+  }
+}
